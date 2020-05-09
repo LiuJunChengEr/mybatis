@@ -1,0 +1,11 @@
+核心是SqlSessionFactory，一旦被创建就应该在应用的运行期间一直存在，没有理由丢弃或者重新创建另一个实例，应该当成一个单例对象
+
+SqlSessionFactory通过SqlSessionFactoryBuilder创建，在创建完SqlSessionFactory之后，其实就不需要SqlSessionFactoryBuilder了，比如说当成一个局部变量
+
+SqlSessionFactoryBuilder可以从一个xml或者configuration实力构建出来
+
+SqlSessionFactory创建出SqlSession，SqlSession是每个线程的实例，并且是线程不安全的，最佳的作用域是请求或者方法作用域，并且一定要关闭例如：try(Session session = sqlSessionFactory.openSession){}
+
+每个SqlSessionFactory只能连接一个数据库，如果想要连接两个就  需要创建两个SqlSessionFactory
+
+Mapper通过SqlSession创建,不需要手动关闭，但是最好还是放在SqlSession的try的方法作用域中

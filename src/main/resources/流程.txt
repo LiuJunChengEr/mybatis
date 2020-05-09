@@ -1,0 +1,45 @@
+以xml配置文件为例
+
+读取配置文件流
+通过文件流&&FactoryBuilder构建Factory
+    通过输入流&&环境&&自定义属性来构建XML解析器
+    从根节点configuration进行解析配置文件流
+        读取properties节点属性
+            该节点属性resource和url不能同时存在，作用是导入其他位置定义的属性
+            将所有属性放到解析器中，在配置文件中放置一份
+        读取settings节点数据
+            判断设置的属性是否是Configuration类所支持的属性
+            设置vfs
+            设置logImpl
+        读取typeAliased节点数据
+            可以进行包扫描或者根据配置的属性进行别名映射
+        读取plugins节点数据
+            将自定义的插件实例加入到configuration中
+        读取objectFactory节点数据
+            将自定义的对象工厂实例加入到configuration中
+        读取objectWrapperFactory节点数据
+        读取reflectorFactory节点数据
+        读取reflectorFactory节点数据
+        将settings中的所有配置的值与mybatis的setting默认值进行合并
+        读取environments节点
+            如果创建builder的是否没有指定环境，那么就用配置文件中的default的值
+            获取所有的环境定义,找到指定的环境id
+                将transactionManager事物管理的实例化
+                将dataSource数据源实例化
+                将环境id、事物实例化、数据源添加到configuration中
+        读取databaseIdProvider节点（数据库厂商标识）
+            在定义的数据库厂商标识中找到当前环境使用的数据源类型id
+        读取typeHandlers节点（类型处理器）
+            可以通过包扫描或者配置的对应类型映射关系
+            将类型处理对应关系注册到configuration中
+        读取mappers节点（映射器）
+            同样可以通过包扫描来实现
+            将mappers添加到configuration中去
+    用configuration来实例化factory
+通过factory获取session连接
+
+
+
+
+
+

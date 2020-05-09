@@ -1,0 +1,8 @@
+以xml配置文件为例
+读取配置文件流
+通过文件流&&FactoryBuilder构建Factory
+    通过输入流&&环境&&自定义属性来构建XML解析器
+    从根节点configuration进行解析配置文件流
+        读取properties节点属性
+            该节点属性resource和url不能同时存在，作用是导入其他位置定义的属性
+
